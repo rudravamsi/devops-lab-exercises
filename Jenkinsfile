@@ -1,15 +1,18 @@
-pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                bat 'echo Hello from Jenkins Pipeline Lab 5 > pipeline-output.txt'
-            }
-        }
-        stage('Test') {
-            steps {
-                bat 'echo Running tests > test-output.txt'
-            }
-        }
-    }
-}
+pipeline { 
+    agent any 
+    parameters { 
+        string(name: 'VERSION', defaultValue: '1.0', description: 'Build version') 
+    } 
+    stages { 
+        stage('Build') { 
+            steps { 
+                bat "echo Building version \${VERSION} > pipeline-output.txt" 
+            } 
+        } 
+        stage('Test') { 
+            steps { 
+                bat "echo Testing version \${VERSION} > test-output.txt" 
+            } 
+        } 
+    } 
+} 
